@@ -61,10 +61,10 @@ defmodule Soap do
       iex> {:ok, wsdl} = Soap.init_model("https://git.io/vNCWd", :url)
       {:ok, %{...}}
   """
-  @spec init_model(String.t(), :file | :url) :: {:ok, map()}
-  def init_model(path, type \\ :file)
-  def init_model(path, :file), do: Wsdl.parse_from_file(path)
-  def init_model(path, :url), do: Wsdl.parse_from_url(path)
+  @spec init_model(String.t(), :file | :url, keyword()) :: {:ok, map()}
+  def init_model(path, type \\ :file, opts \\ [])
+  def init_model(path, :file, _opts), do: Wsdl.parse_from_file(path)
+  def init_model(path, :url, opts), do: Wsdl.parse_from_url(path, [], opts)
 
   @doc """
   Send a request to the SOAP server based on the passed WSDL file, action and parameters.
